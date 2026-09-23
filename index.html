@@ -871,7 +871,7 @@ td .btn-grid{min-width:540px}
     </div>
     <div class="sys-status">
       <div class="ss-label">VERSI</div>
-      <div class="ss-val">2.5 · 23 SEPT</div>
+      <div class="ss-val">2.6 · 23 SEPT</div>
     </div>
   </div>
 </header>
@@ -900,7 +900,7 @@ td .btn-grid{min-width:540px}
     <div class="sb-flex"></div>
     <div class="sb-security">
       <div class="sec-lbl">Status Dokumen</div>
-      <div class="sec-level">VERSI 2.5</div>
+      <div class="sec-level">VERSI 2.6</div>
       <div class="sec-sub">Dikemas kini 23 September 2026</div>
       <div class="sb-enc">
         <span class="dot-live" style="background:var(--blue2);box-shadow:0 0 6px var(--blue2)"></span>
@@ -935,7 +935,7 @@ td .btn-grid{min-width:540px}
 
 <div class="statusbar">
   <span class="sbs"><span class="sbd" style="background:var(--green);color:var(--green)"></span>PORTAL ONLINE</span>
-  <span class="sbs">DOKUMEN 6</span>
+  <span class="sbs">DOKUMEN 7</span>
   <span class="sbs">NEGERI 4</span>
   <span class="sbs">INDIKATOR 23</span>
   <span class="sbs">SENARIO 2</span>
@@ -966,15 +966,17 @@ const DOCS = {
     desc: "Kertas cadangan rasmi lengkap: analisis perjawatan empat negeri, pilihan struktur, kos, laluan kerjaya dan lampiran data.",
     baru: "Lampiran I.2 dan Jadual 61: Dua Senario Naik Taraf Gred PKB/PKD dibentangkan secara neutral.",
     pdf: F + "KERTAS_CADANGAN_Penstrukturan_Semula_Perjawatan_KEMAS_Model_Negeri_Besar_v2.3.pdf", pdfSize: "3.4 MB",
-    docx: F + "KERTAS_CADANGAN_Penstrukturan_Semula_Perjawatan_KEMAS_Model_Negeri_Besar_v2.3.docx", docxSize: "2.3 MB"
+    docx: F + "KERTAS_CADANGAN_Penstrukturan_Semula_Perjawatan_KEMAS_Model_Negeri_Besar_v2.3.docx", docxSize: "2.3 MB",
+    slides: F + "Cadangan_Penstrukturan_Model_Negeri_Besar_v2.3.html", slidesSub: "HTML · 57 slaid"
   },
   analisis: {
     code: "ANALISIS v1.6", acc: "a-c3", name: "Analisis Isu Struktur dan Perjawatan Empat Negeri Besar KEMAS",
     facts: [["Muka surat","37"],["Isu","10"],["Negeri","4"],["Tarikh","23 Sept 2026"]],
     desc: "Analisis merentas isu: keadaan semasa, jurang dan cadangan penyelesaian bagi Sarawak, Sabah, Johor dan Perak. Dokumen kerja dalaman Kumpulan 4.",
-    baru: "Seksyen K dan Jadual K.1: analisis khusus Dua Senario Naik Taraf Gred PKB/PKD.",
+    baru: "Seksyen K dan Jadual K.1: analisis khusus Dua Senario Naik Taraf Gred PKB/PKD. Kini ada Interactive Slides (21 slaid HTML) dengan teks penuh setiap dapatan dalam pop-up.",
     pdf: F + "Analisis_Isu_4Negeri_Besar_KEMAS_v1.6.pdf", pdfSize: "0.4 MB",
     docx: F + "Analisis_Isu_4Negeri_Besar_KEMAS_v1.6.docx", docxSize: "57 KB",
+    slides: F + "Analisis_Isu_4Negeri_Besar_KEMAS_v1.6_Deck.html", slidesSub: "HTML · 21 slaid",
     internal: true
   },
   canva: {
@@ -1044,7 +1046,9 @@ const tile = (tag, cls, label, sub, attrs) =>
 function btnsFor(k){
   const d = DOCS[k]; let h = "";
   if (d.pdf) h += tile("button", "b-view", "View PDF", "Dalam portal", `type="button" data-act="pdf:${k}"`)
-    + tile("a", "b-tab", "New Tab", "Skrin penuh", `href="${d.pdf}" target="_blank" rel="noopener"`)
+    + (d.slides
+        ? tile("a", "b-tab", "Interactive Slides", d.slidesSub || "HTML", `href="${d.slides}" target="_blank" rel="noopener"`)
+        : tile("a", "b-tab", "New Tab", "Skrin penuh", `href="${d.pdf}" target="_blank" rel="noopener"`))
     + tile("a", "b-pdf", "Download PDF", d.pdfSize, `href="${d.pdf}" download`)
     + tile("a", "b-docx", "Download DOCX", d.docxSize, `href="${d.docx}" download`);
   if (d.html) h += tile("a", "b-view", "Open Deck", "HTML · 57 slaid", `href="${d.html}" target="_blank" rel="noopener"`)
@@ -1098,14 +1102,14 @@ $("#pane-home").innerHTML = `
   </div>
 
   <div class="panel">
-    <div class="panel-hdr"><h2>Senarai Dokumen dan Download</h2><span class="meta">6 fail · kemas kini 23 Sept 2026</span></div>
+    <div class="panel-hdr"><h2>Senarai Dokumen dan Download</h2><span class="meta">7 fail · kemas kini 23 Sept 2026</span></div>
     <div class="panel-body">
       <div class="tbl-scroll"><table>
         <thead><tr><th style="width:21%">Dokumen</th><th style="width:7%">Versi</th><th style="width:17%">Format</th><th style="width:55%">Tindakan</th></tr></thead>
         <tbody>
           <tr><td class="w">Deck Interaktif Cadangan</td><td>2.3</td><td>HTML · 1.0 MB</td><td><div class="btn-grid a-c2">${btnsFor("deck")}</div></td></tr>
           <tr><td class="w">Proposal Cadangan</td><td>2.3</td><td>PDF 3.4 MB · DOCX 2.3 MB</td><td><div class="btn-grid a-c1">${btnsFor("kertas")}</div></td></tr>
-          <tr><td class="w">Analisis Isu 4 Negeri</td><td>1.6</td><td>PDF 0.4 MB · DOCX 57 KB</td><td><div class="btn-grid a-c3">${btnsFor("analisis")}</div></td></tr>
+          <tr><td class="w">Analisis Isu 4 Negeri</td><td>1.6</td><td>PDF 0.4 MB · DOCX 57 KB · Slaid HTML 0.3 MB</td><td><div class="btn-grid a-c3">${btnsFor("analisis")}</div></td></tr>
           <tr><td class="w">Slaid Format HQ</td><td>Semasa</td><td>Canva</td><td><div class="btn-grid a-purple">${btnsFor("canva")}</div></td></tr>
           <tr><td class="w">Kriteria Indikator Wajaran</td><td>1.3</td><td>Excel · 70 KB</td><td><div class="btn-grid a-gold">${btnsFor("wajaran")}</div></td></tr>
         </tbody>
@@ -1293,6 +1297,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeReader(
 function openPdf(k){
   const d = DOCS[k];
   openReader(d.code + (d.internal ? " · DALAMAN" : ""), d.name, d.pdf + "#view=FitH",
+    (d.slides ? `<a class="lnk eq b-view ${d.acc}" href="${d.slides}" target="_blank" rel="noopener">Interactive Slides · ${d.slidesSub || "HTML"}</a>` : "") +
     `<a class="lnk eq b-tab" href="${d.pdf}" target="_blank" rel="noopener">New Tab</a>
      <a class="lnk eq b-pdf" href="${d.pdf}" download>Download PDF · ${d.pdfSize}</a>
      <a class="lnk eq b-docx" href="${d.docx}" download>Download DOCX · ${d.docxSize}</a>
