@@ -947,7 +947,7 @@ const DOCS = {
   deck: {
     code: "DECK v2.3", acc: "a-c2", name: "Deck Interaktif Cadangan Penstrukturan",
     facts: [["Format","HTML interaktif"],["Slaid","57"],["Pop-up data","195"],["Saiz","1.0 MB"]],
-    desc: "Deck pembentangan dengan pop-up data daripada kertas cadangan pada setiap kad, panel dan statistik. Buka dalam tab baharu untuk mod skrin penuh.",
+    desc: "Deck pembentangan dengan pop-up data daripada kertas cadangan pada setiap kad, panel dan statistik. Buka dalam new tab untuk mod skrin penuh.",
     baru: "Slaid penutup baharu: perbandingan Dua Senario Naik Taraf Gred PKB/PKD (Lampiran I.2).",
     html: F + "Cadangan_Penstrukturan_Model_Negeri_Besar_v2.3.html"
   },
@@ -1035,10 +1035,10 @@ const tile = (tag, cls, label, sub, attrs) =>
 function btnsFor(k){
   const d = DOCS[k]; let h = "";
   if (d.pdf) h += tile("button", "b-view", "View PDF", "Dalam portal", `type="button" data-act="pdf:${k}"`)
-    + tile("a", "b-tab", "Tab baharu", "Skrin penuh", `href="${d.pdf}" target="_blank" rel="noopener"`)
+    + tile("a", "b-tab", "New Tab", "Skrin penuh", `href="${d.pdf}" target="_blank" rel="noopener"`)
     + tile("a", "b-pdf", "Download PDF", d.pdfSize, `href="${d.pdf}" download`)
     + tile("a", "b-docx", "Download DOCX", d.docxSize, `href="${d.docx}" download`);
-  if (d.html) h += tile("a", "b-view", "Buka Deck", "HTML · 57 slaid", `href="${d.html}" target="_blank" rel="noopener"`)
+  if (d.html) h += tile("a", "b-view", "Open Deck", "HTML · 57 slaid", `href="${d.html}" target="_blank" rel="noopener"`)
     + tile("a", "b-pub", "Pautan awam", "GitHub Pages", `href="${DECK_LIVE}" target="_blank" rel="noopener"`);
   if (d.link) h += tile("a", "b-view", "Buka di Canva", "Pautan luar", `href="${d.link}" target="_blank" rel="noopener"`);
   if (d.xlsx) h += tile("a", "b-pdf", "Download XLSX", d.xlsxSize, `href="${d.xlsx}" download`)
@@ -1073,7 +1073,7 @@ $("#pane-home").innerHTML = `
   </div>
   <div class="sec-label">Modul Dokumen</div>
   <div class="sistem-grid">
-    ${card("01","a-c2",ICO.deck,"DECK","Deck Interaktif · v2.3","LIVE","st-live","57 slaid dengan pop-up data daripada kertas cadangan. Dibuka dalam tab baharu.",["HTML","57 SLAID"],"deck")}
+    ${card("01","a-c2",ICO.deck,"DECK","Deck Interaktif · v2.3","LIVE","st-live","57 slaid dengan pop-up data daripada kertas cadangan. Dibuka dalam new tab.",["HTML","57 SLAID"],"deck")}
     ${card("02","a-c1",ICO.doc,"PROPOSAL","Proposal Cadangan · v2.3","PDF","st-live","143 muka surat, 61 jadual, 36 rujukan. View terus dalam pelayar atau download PDF dan DOCX.",["PDF","DOCX"],"pdf:kertas")}
     ${card("03","a-c3",ICO.chart,"ANALISIS","Analisis Isu 4 Negeri · v1.6","DALAMAN","st-int","10 isu merentas 4 negeri, termasuk Seksyen K Dua Senario PKB/PKD. Dokumen kerja Kumpulan 4.",["PDF","DOCX"],"pdf:analisis")}
     ${card("04","a-purple",ICO.slide,"SLAID HQ","Format HQ · Canva","LUAR","st-ext","Slaid pembentangan format Ibu Pejabat KEMAS. Dibuka dalam Canva.",["CANVA"],"canva")}
@@ -1277,11 +1277,11 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeReader(
 function openPdf(k){
   const d = DOCS[k];
   openReader(d.code + (d.internal ? " · DALAMAN" : ""), d.name, d.pdf + "#view=FitH",
-    `<a class="lnk eq b-tab" href="${d.pdf}" target="_blank" rel="noopener">Tab baharu</a>
+    `<a class="lnk eq b-tab" href="${d.pdf}" target="_blank" rel="noopener">New Tab</a>
      <a class="lnk eq b-pdf" href="${d.pdf}" download>Download PDF · ${d.pdfSize}</a>
      <a class="lnk eq b-docx" href="${d.docx}" download>Download DOCX · ${d.docxSize}</a>
      <span class="reader-count">${fileName(d.pdf)}</span>`,
-    "Jika PDF tidak dipaparkan (sesetengah pelayar telefon), guna butang Tab baharu.");
+    "Jika PDF tidak dipaparkan (sesetengah pelayar telefon), guna butang New Tab.");
 }
 function openDrive(key){
   const s = STATES.find(x => x.key === key);
