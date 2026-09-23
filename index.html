@@ -979,7 +979,7 @@ const DOCS = {
     code: "WAJARAN v1.3", acc: "a-gold", name: "HQ - Kriteria Indikator Wajaran (Model Negeri Besar)",
     facts: [["Format","Excel (.xlsx)"],["Sheet","7"],["Sub-kriteria","23"],["Diskor","17/23"]],
     desc: "Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah Senario A, Senario B keluasan, borang data negeri dan kaedah penuh. Ringkasan langsung ada di tab Wajaran & Indikator.",
-    baru: "v1.3: Perak melengkapkan Borang B4 hingga B12 dan B14 (23 Sept 2026); Baucer Sarawak dikemas kini 15,000. Sub-kriteria diskor naik daripada 14 kepada 17 daripada 23; kedudukan Johor dan Perak bertukar (lihat Nota Data).",
+    baru: "v1.3: Perak melengkapkan Borang B4 hingga B12 dan B14 (23 Sept 2026); Baucer Sarawak dikemas kini 15,000. Sub-kriteria diskor naik daripada 14 kepada 17 daripada 23; kedudukan Johor dan Perak bertukar (view Nota Data).",
     xlsx: F + "HQ_Kriteria_Indikator_Wajaran_v1.3.xlsx", xlsxSize: "70 KB"
   }
 };
@@ -1034,15 +1034,15 @@ const tile = (tag, cls, label, sub, attrs) =>
   `<${tag} class="lnk ${cls}" ${attrs}><span class="bl">${label}</span><span class="bs">${sub}</span></${tag}>`;
 function btnsFor(k){
   const d = DOCS[k]; let h = "";
-  if (d.pdf) h += tile("button", "b-view", "Lihat PDF", "Dalam portal", `type="button" data-act="pdf:${k}"`)
+  if (d.pdf) h += tile("button", "b-view", "View PDF", "Dalam portal", `type="button" data-act="pdf:${k}"`)
     + tile("a", "b-tab", "Tab baharu", "Skrin penuh", `href="${d.pdf}" target="_blank" rel="noopener"`)
-    + tile("a", "b-pdf", "Muat turun PDF", d.pdfSize, `href="${d.pdf}" download`)
-    + tile("a", "b-docx", "Muat turun DOCX", d.docxSize, `href="${d.docx}" download`);
+    + tile("a", "b-pdf", "Download PDF", d.pdfSize, `href="${d.pdf}" download`)
+    + tile("a", "b-docx", "Download DOCX", d.docxSize, `href="${d.docx}" download`);
   if (d.html) h += tile("a", "b-view", "Buka Deck", "HTML · 57 slaid", `href="${d.html}" target="_blank" rel="noopener"`)
     + tile("a", "b-pub", "Pautan awam", "GitHub Pages", `href="${DECK_LIVE}" target="_blank" rel="noopener"`);
   if (d.link) h += tile("a", "b-view", "Buka di Canva", "Pautan luar", `href="${d.link}" target="_blank" rel="noopener"`);
-  if (d.xlsx) h += tile("a", "b-pdf", "Muat turun XLSX", d.xlsxSize, `href="${d.xlsx}" download`)
-    + tile("button", "b-tab", "Lihat Dalam Portal", "Wajaran & Indikator", `type="button" data-act="tab:wajaran"`);
+  if (d.xlsx) h += tile("a", "b-pdf", "Download XLSX", d.xlsxSize, `href="${d.xlsx}" download`)
+    + tile("button", "b-tab", "View Dalam Portal", "Wajaran & Indikator", `type="button" data-act="tab:wajaran"`);
   return h;
 }
 
@@ -1074,7 +1074,7 @@ $("#pane-home").innerHTML = `
   <div class="sec-label">Modul Dokumen</div>
   <div class="sistem-grid">
     ${card("01","a-c2",ICO.deck,"DECK","Deck Interaktif · v2.3","LIVE","st-live","57 slaid dengan pop-up data daripada kertas cadangan. Dibuka dalam tab baharu.",["HTML","57 SLAID"],"deck")}
-    ${card("02","a-c1",ICO.doc,"PROPOSAL","Proposal Cadangan · v2.3","PDF","st-live","143 muka surat, 61 jadual, 36 rujukan. Lihat terus dalam pelayar atau muat turun PDF dan DOCX.",["PDF","DOCX"],"pdf:kertas")}
+    ${card("02","a-c1",ICO.doc,"PROPOSAL","Proposal Cadangan · v2.3","PDF","st-live","143 muka surat, 61 jadual, 36 rujukan. View terus dalam pelayar atau download PDF dan DOCX.",["PDF","DOCX"],"pdf:kertas")}
     ${card("03","a-c3",ICO.chart,"ANALISIS","Analisis Isu 4 Negeri · v1.6","DALAMAN","st-int","10 isu merentas 4 negeri, termasuk Seksyen K Dua Senario PKB/PKD. Dokumen kerja Kumpulan 4.",["PDF","DOCX"],"pdf:analisis")}
     ${card("04","a-purple",ICO.slide,"SLAID HQ","Format HQ · Canva","LUAR","st-ext","Slaid pembentangan format Ibu Pejabat KEMAS. Dibuka dalam Canva.",["CANVA"],"canva")}
     ${card("05","a-green",ICO.folder,"DATA","Data 4 Negeri · Google Drive","DRIVE","st-ext","Folder Lampiran perjawatan Sarawak, Sabah, Johor dan Perak. Pratonton atau buka terus.",["4 FOLDER"],"tab:negeri")}
@@ -1082,7 +1082,7 @@ $("#pane-home").innerHTML = `
   </div>
 
   <div class="panel">
-    <div class="panel-hdr"><h2>Senarai Dokumen dan Muat Turun</h2><span class="meta">6 fail · kemas kini 23 Sept 2026</span></div>
+    <div class="panel-hdr"><h2>Senarai Dokumen dan Download</h2><span class="meta">6 fail · kemas kini 23 Sept 2026</span></div>
     <div class="panel-body">
       <div class="tbl-scroll"><table>
         <thead><tr><th style="width:21%">Dokumen</th><th style="width:7%">Versi</th><th style="width:17%">Format</th><th style="width:55%">Tindakan</th></tr></thead>
@@ -1176,7 +1176,7 @@ const WIND = [
 $("#pane-wajaran").innerHTML = `
   <div class="hero"><div class="hero-welcome">HQ - Kriteria Indikator Wajaran · v1.3 · 23 Sept 2026 · kemas kini data Perak</div>
     <div class="hero-title"><span class="ht-line1">WAJARAN &amp; INDIKATOR</span><span class="ht-gold">Beban tugas berwajaran, 4 negeri besar</span></div>
-    <div class="hero-desc">Kerangka wajaran HQ (fail negeri sederhana v3) diterapkan ke atas Sarawak, Sabah, Johor dan Perak merentas 4 kriteria dan 23 sub-kriteria. Indeks 1.00 = purata 5 negeri sederhana (Selangor, Kedah, Pahang, Terengganu, Kelantan). Muat turun fail Excel penuh (formula, borang negeri dan kaedah) di tab Dokumen.</div></div>
+    <div class="hero-desc">Kerangka wajaran HQ (fail negeri sederhana v3) diterapkan ke atas Sarawak, Sabah, Johor dan Perak merentas 4 kriteria dan 23 sub-kriteria. Indeks 1.00 = purata 5 negeri sederhana (Selangor, Kedah, Pahang, Terengganu, Kelantan). Download fail Excel penuh (formula, borang negeri dan kaedah) di tab Dokumen.</div></div>
   <div class="sec-label">Indeks Beban Tugas Berwajaran (Senario A)</div>
   <div class="stgrid">${WNEGERI.map(s => `
     <div class="stc ${s.acc}">
@@ -1242,7 +1242,7 @@ $("#pane-senario").innerHTML = `
       </tbody></table></div>
       <div class="alert info"><h3>Cadangan Kumpulan 4</h3><p>Kumpulan 4 memperjuangkan Senario 1 sebagai permohonan rasmi sekarang: gred PKD seluruh 4 negeri diseragamkan kepada S9/S10 menyamai PKB. JD 60 PKD dan penilaian jawatan disiapkan serentak dengan permohonan, bukan sebagai syarat untuk menangguhkannya. Pilihan 2 ke 4 kekal diteruskan; Senario 1 dibawa bersama sebagai permohonan khusus gred PKB/PKD.</p></div>
       <div class="fnote">Kaedah kos jawatan baharu (Jadual 55) tidak sama dengan kaedah pemindahan gred penyandang sedia ada; angka Senario 1 indikatif kasar sahaja dan bukan asas rundingan. Sumber: Kertas Cadangan v2.3 (Lampiran I.2, Jadual 55 hingga 61) dan Analisis Isu v1.6 (Seksyen K).</div>
-      <div class="btn-grid c2 w-md"><button class="lnk b-view a-c1" type="button" data-act="pdf:kertas"><span class="bl">Lihat Proposal Cadangan</span><span class="bs">PDF · Lampiran I.2, Jadual 61</span></button><button class="lnk b-view a-c3" type="button" data-act="pdf:analisis"><span class="bl">Lihat Analisis Isu</span><span class="bs">PDF · Seksyen K</span></button></div>
+      <div class="btn-grid c2 w-md"><button class="lnk b-view a-c1" type="button" data-act="pdf:kertas"><span class="bl">View Proposal Cadangan</span><span class="bs">PDF · Lampiran I.2, Jadual 61</span></button><button class="lnk b-view a-c3" type="button" data-act="pdf:analisis"><span class="bl">View Analisis Isu</span><span class="bs">PDF · Seksyen K</span></button></div>
     </div>
   </div>`;
 
@@ -1278,8 +1278,8 @@ function openPdf(k){
   const d = DOCS[k];
   openReader(d.code + (d.internal ? " · DALAMAN" : ""), d.name, d.pdf + "#view=FitH",
     `<a class="lnk eq b-tab" href="${d.pdf}" target="_blank" rel="noopener">Tab baharu</a>
-     <a class="lnk eq b-pdf" href="${d.pdf}" download>Muat turun PDF · ${d.pdfSize}</a>
-     <a class="lnk eq b-docx" href="${d.docx}" download>Muat turun DOCX · ${d.docxSize}</a>
+     <a class="lnk eq b-pdf" href="${d.pdf}" download>Download PDF · ${d.pdfSize}</a>
+     <a class="lnk eq b-docx" href="${d.docx}" download>Download DOCX · ${d.docxSize}</a>
      <span class="reader-count">${fileName(d.pdf)}</span>`,
     "Jika PDF tidak dipaparkan (sesetengah pelayar telefon), guna butang Tab baharu.");
 }
