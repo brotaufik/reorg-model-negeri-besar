@@ -785,6 +785,39 @@ td.k{font-family:var(--mono);font-size:10px;letter-spacing:.6px;color:var(--text
 .sc-quickact .lnk.cpt{min-height:28px;padding:5px 4px;justify-content:center;align-items:center;gap:0}
 .sc-quickact .lnk.cpt .bl{font-size:9.5px;letter-spacing:1px;text-align:center;line-height:1.2}
 
+/* Tab Wajaran: jadual KEPUTUSAN 9 negeri + carta bar Senario A/B (angka Ringkasan Excel v1.4) */
+:root{--wcA:#2196F3;--wcB:#B8860B;--kp-avg:rgba(255,214,0,.07)}
+:root[data-theme="light"]{--wcA:#1565C0;--wcB:#A6790A;--kp-avg:rgba(166,121,10,.09)}
+.kp-tbl{min-width:760px}
+.kp-tbl th.kp-num,.kp-tbl td.kp-num{text-align:right;font-variant-numeric:tabular-nums}
+.kp-tbl td.kp-num{font-family:var(--mono);font-size:12px;color:var(--text2);white-space:nowrap}
+.kp-tbl td.kp-bold{font-weight:700;color:var(--text)}
+.kp-tbl tr.kp-big td:first-child{border-left:3px solid var(--acc)}
+.kp-tbl tr.kp-big td.w{color:var(--text)}
+.kp-tbl tr.kp-sed td.w{font-weight:400}
+.kp-tbl tr.kp-avg td{background:var(--kp-avg);border-top:1px solid var(--border2)}
+.kp-tbl tr.kp-avg td.w{color:var(--text)}
+.wc-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.8px;color:var(--text3)}
+.wc-legend span{display:inline-flex;align-items:center;gap:6px}
+.wc-legend .wc-lg-note{margin-left:auto;color:var(--subtext);font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.wc-sw{width:11px;height:11px;border-radius:2px;display:inline-block;box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+.wc-sw.wc-a{background:var(--wcA)}.wc-sw.wc-b{background:var(--wcB)}
+.wc-sw.wc-ref-sw{width:18px;height:0;border-top:2px dashed var(--dim);border-radius:0;box-shadow:none}
+.wc-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:5px;box-shadow:var(--sunk);background:var(--bg)}
+svg.wc{display:block;width:100%;min-width:720px;height:auto;font-family:var(--mono)}
+.wc-bar.wc-a{fill:var(--wcA)}.wc-bar.wc-b{fill:var(--wcB)}
+.wc-bar{transition:filter .15s}.wc-bar:hover{filter:brightness(1.18)}
+.wc-grid{stroke:var(--border);stroke-width:1}
+.wc-axis{stroke:var(--border3);stroke-width:1.2}
+.wc-ref{stroke:var(--dim);stroke-width:1.2;stroke-dasharray:5 4}
+.wc-div{stroke:var(--border3);stroke-width:1;stroke-dasharray:3 4}
+.wc-tick,.wc-refl,.wc-grp,.wc-ylab{fill:var(--subtext);font-size:10px;letter-spacing:.6px}
+.wc-refl{font-size:9.5px}
+.wc-grp,.wc-ylab{font-size:8.5px;letter-spacing:1.4px;font-weight:700}
+.wc-val{fill:var(--text2);font-size:11px;font-weight:700}
+.wc-cat{fill:var(--text3);font-size:11.5px;font-family:var(--title);letter-spacing:.4px}
+.wc-cat.big{fill:var(--text);font-weight:700}
+
 @media (max-width:1080px){.docgrid,.stgrid,.sn-grid{grid-template-columns:1fr}}
 @media (max-width:820px){
   .logo-wrap{min-width:0;width:100%}
@@ -870,7 +903,7 @@ td .btn-grid{min-width:540px}
     </div>
     <div class="sys-status">
       <div class="ss-label">VERSI</div>
-      <div class="ss-val">2.7 · 23 SEPT</div>
+      <div class="ss-val">2.8 · 23 SEPT</div>
     </div>
   </div>
 </header>
@@ -899,7 +932,7 @@ td .btn-grid{min-width:540px}
     <div class="sb-flex"></div>
     <div class="sb-security">
       <div class="sec-lbl">Status Dokumen</div>
-      <div class="sec-level">VERSI 2.7</div>
+      <div class="sec-level">VERSI 2.8</div>
       <div class="sec-sub">Dikemas kini 23 September 2026</div>
       <div class="sb-enc">
         <span class="dot-live" style="background:var(--blue2);box-shadow:0 0 6px var(--blue2)"></span>
@@ -1176,6 +1209,65 @@ const WNEGERI = [
   { n: "Johor",   acc: "a-c3", idxA: "1.41x", rankA: 3, idxB: "1.39x", rankB: 3, nop: "1.55x", delta: "v1.3: 1.15x, #5" },
   { n: "Perak",   acc: "a-purple", idxA: "1.17x", rankA: 4, idxB: "1.18x", rankB: 4, nop: "1.31x", delta: "v1.3: 1.48x, #3" }
 ];
+// KEPUTUSAN 9 negeri: sheet Ringkasan Excel v1.4 (baris 18-28), dikira daripada sheet Skor Senario A dan Senario B Geografi.
+// [negeri, kategori(B=besar, S=sederhana), idxA, rankA, idxB, rankB, tanpa Pengurusan, diskor(/23), liputan berwajaran]
+const WKEP = [
+  ["Sarawak","B",1.9734,1,2.5361,1,2.2239,16,0.5339],
+  ["Sabah","B",1.8801,2,2.1434,2,1.9406,16,0.5339],
+  ["Johor","B",1.4149,3,1.3907,3,1.5511,16,0.5339],
+  ["Perak","B",1.1732,4,1.1843,4,1.3094,16,0.5339],
+  ["Selangor","S",1.1562,5,1.0900,6,1.1863,16,0.5339],
+  ["Kedah","S",1.0538,6,1.0064,7,1.1249,15,0.4964],
+  ["Pahang","S",0.9933,7,1.1146,5,0.9801,15,0.4964],
+  ["Terengganu","S",0.9613,8,0.9448,8,0.8093,16,0.5339],
+  ["Kelantan","S",0.8435,9,0.8514,9,0.9155,16,0.5339]
+];
+const WKEP_AVG = [
+  ["Purata 5 negeri sederhana",1.0016,1.0014,1.0032,15.6,0.5189],
+  ["Purata 4 negeri besar",1.6104,1.8136,1.7563,16.0,0.5339]
+];
+const WACC = { Sarawak: "a-c2", Sabah: "a-green", Johor: "a-c3", Perak: "a-purple" };
+const f2 = v => v.toFixed(2), fp = v => (v * 100).toFixed(1) + "%";
+function wKepTable(){
+  const rows = WKEP.map(([n,kat,a,ra,b,rb,nop,d,l]) => `
+    <tr class="${kat === "B" ? "kp-big " + WACC[n] : "kp-sed"}"><td class="w">${n}</td><td>${kat === "B" ? "Negeri besar" : "Negeri sederhana"}</td>
+      <td class="kp-num kp-bold">${f2(a)}</td><td class="kp-num">${ra}</td><td class="kp-num kp-bold">${f2(b)}</td><td class="kp-num">${rb}</td>
+      <td class="kp-num">${f2(nop)}</td><td class="kp-num">${d}</td><td class="kp-num">${fp(l)}</td></tr>`).join("");
+  const avg = WKEP_AVG.map(([n,a,b,nop,d,l]) => `
+    <tr class="kp-avg"><td class="w">${n}</td><td></td><td class="kp-num kp-bold">${f2(a)}</td><td></td><td class="kp-num kp-bold">${f2(b)}</td><td></td>
+      <td class="kp-num kp-bold">${f2(nop)}</td><td class="kp-num kp-bold">${d.toFixed(1)}</td><td class="kp-num kp-bold">${fp(l)}</td></tr>`).join("");
+  return `<div class="tbl-scroll"><table class="kp-tbl">
+    <thead><tr><th>Negeri</th><th>Kategori</th><th class="kp-num">Indeks Senario A<br>(wajaran HQ)</th><th class="kp-num">Kedudukan A</th><th class="kp-num">Indeks Senario B<br>(+ keluasan)</th><th class="kp-num">Kedudukan B</th><th class="kp-num">Indeks tanpa<br>Pengurusan</th><th class="kp-num">Sub-kriteria<br>diskor (/23)</th><th class="kp-num">Liputan<br>berwajaran</th></tr></thead>
+    <tbody>${rows}${avg}</tbody></table></div>`;
+}
+function wChart(){
+  const W = 1000, H = 372, L = 54, R = 18, T = 30, B = 74, maxY = 3, step = 0.5;
+  const pw = W - L - R, ph = H - T - B, gw = pw / WKEP.length, bw = Math.min(30, gw * 0.3), gap = 3;
+  const y = v => T + ph - (v / maxY) * ph;
+  const bar = (x, v, cls, title) => {
+    const top = y(v), h = y(0) - top, r = Math.min(4, h);
+    return `<path class="wc-bar ${cls}" d="M${x} ${y(0)}V${top + r}q0 -${r} ${r} -${r}h${bw - 2*r}q${r} 0 ${r} ${r}V${y(0)}Z"><title>${title}</title></path>
+      <text class="wc-val" x="${x + bw/2}" y="${top - 5}" text-anchor="middle">${f2(v)}</text>`;
+  };
+  let g = "";
+  for (let v = 0; v <= maxY + 1e-9; v += step) g += `<line class="wc-grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="wc-tick" x="${L-8}" y="${y(v)+4}" text-anchor="end">${f2(v)}</text>`;
+  let bars = "", labels = "";
+  WKEP.forEach(([n,kat,a,ra,b,rb], i) => {
+    const cx = L + gw * i + gw / 2, xa = cx - bw - gap / 2, xb = cx + gap / 2;
+    bars += bar(xa, a, "wc-a", `${n} · Senario A (wajaran HQ): ${f2(a)} · kedudukan ${ra}`) + bar(xb, b, "wc-b", `${n} · Senario B (+ keluasan): ${f2(b)} · kedudukan ${rb}`);
+    labels += `<text class="wc-cat${kat === "B" ? " big" : ""}" x="${cx}" y="${y(0) + 18}" text-anchor="middle">${n}</text>`;
+  });
+  const xDiv = L + gw * 4;
+  const ref = `<line class="wc-ref" x1="${L}" x2="${W-R}" y1="${y(1)}" y2="${y(1)}"><title>Garis rujukan 1.00 = purata 5 negeri sederhana</title></line>`;
+  const div = `<line class="wc-div" x1="${xDiv}" x2="${xDiv}" y1="${T-6}" y2="${y(0)+40}"/>
+    <text class="wc-grp" x="${(L + xDiv)/2}" y="${y(0)+38}" text-anchor="middle">NEGERI BESAR</text>
+    <text class="wc-grp" x="${(xDiv + W - R)/2}" y="${y(0)+38}" text-anchor="middle">NEGERI SEDERHANA · GARIS ASAS</text>`;
+  return `<div class="wc-legend"><span><i class="wc-sw wc-a"></i>Senario A (wajaran HQ)</span><span><i class="wc-sw wc-b"></i>Senario B (+ keluasan)</span><span><i class="wc-sw wc-ref-sw"></i>Garis 1.00 = purata 5 negeri sederhana</span><span class="wc-lg-note">Indeks nisbah · Ringkasan Excel v1.4</span></div>
+    <div class="wc-wrap"><svg class="wc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Carta bar Indeks Beban Tugas Berwajaran, Senario A dan Senario B, 9 negeri">
+      ${g}${ref}<line class="wc-axis" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/>${bars}${labels}${div}
+      <text class="wc-ylab" transform="translate(14 ${T + ph/2}) rotate(-90)" text-anchor="middle">INDEKS</text>
+    </svg></div>`;
+}
 // [kod, kriteria, sub-kriteria, [Sarawak,Sabah,Johor,Perak], diskor(1/0)]
 const WIND = [
   ["1.1","PAKK","Bilangan kelas TABIKA",["1,300","1,402","1,162","804"],1],
@@ -1219,6 +1311,16 @@ $("#pane-wajaran").innerHTML = `
         </div>
       </div>
     </div>`).join("")}
+  </div>
+  <div class="panel">
+    <div class="panel-hdr"><h2>Keputusan 9 Negeri</h2><span class="meta">Ringkasan Excel v1.4 · dikira daripada sheet Skor Senario A dan Senario B Geografi</span></div>
+    <div class="panel-body">${wKepTable()}
+      <div class="fnote">Tafsiran: Senario A, Sarawak 1.97x, Sabah 1.88x, Johor 1.41x dan Perak 1.17x purata negeri sederhana. Senario B: 2.54x, 2.14x, 1.39x dan 1.18x. Liputan data: 53% kerangka HQ (ikut wajaran). Kedah dan Pahang 15/23 kerana tiada nilai 3.3 (Bilangan aktiviti / program) bagi dua negeri itu; garis asas 3.3 dikira daripada tiga negeri sederhana yang ada data.</div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-hdr"><h2>Indeks Beban Tugas Berwajaran</h2><span class="meta">Senario A dan Senario B · 9 negeri · wajaran keluasan 10% dalam Senario B</span></div>
+    <div class="panel-body">${wChart()}</div>
   </div>
   <div class="panel">
     <div class="panel-hdr"><h2>Wajaran Kriteria (HQ)</h2><span class="meta">Jumlah 100%</span></div>
