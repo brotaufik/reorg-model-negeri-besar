@@ -862,7 +862,7 @@ td .btn-grid{min-width:540px}
     </div>
     <div class="sys-status">
       <div class="ss-label">VERSI</div>
-      <div class="ss-val">2.3 · 23 SEPT</div>
+      <div class="ss-val">2.4 · 23 SEPT</div>
     </div>
   </div>
 </header>
@@ -871,6 +871,7 @@ td .btn-grid{min-width:540px}
   <button class="nb-item active" data-tab="home" type="button">Pusat Kawalan</button>
   <button class="nb-item" data-tab="dokumen" type="button">Dokumen</button>
   <button class="nb-item" data-tab="negeri" type="button">Data Negeri</button>
+  <button class="nb-item" data-tab="wajaran" type="button">Wajaran &amp; Indikator</button>
   <button class="nb-item" data-tab="senario" type="button">Senario PKB/PKD</button>
   <span class="nb-spacer"></span>
   <button class="nb-btn" id="themeBtn" type="button">Mod: Gelap</button>
@@ -890,7 +891,7 @@ td .btn-grid{min-width:540px}
     <div class="sb-flex"></div>
     <div class="sb-security">
       <div class="sec-lbl">Status Dokumen</div>
-      <div class="sec-level">VERSI 2.3</div>
+      <div class="sec-level">VERSI 2.4</div>
       <div class="sec-sub">Dikemas kini 23 September 2026</div>
       <div class="sb-enc">
         <span class="dot-live" style="background:var(--blue2);box-shadow:0 0 6px var(--blue2)"></span>
@@ -904,6 +905,7 @@ td .btn-grid{min-width:540px}
       <section id="pane-home"></section>
       <section id="pane-dokumen" class="hidden"></section>
       <section id="pane-negeri" class="hidden"></section>
+      <section id="pane-wajaran" class="hidden"></section>
       <section id="pane-senario" class="hidden"></section>
     </div>
   </main>
@@ -924,8 +926,9 @@ td .btn-grid{min-width:540px}
 
 <div class="statusbar">
   <span class="sbs"><span class="sbd" style="background:var(--green);color:var(--green)"></span>PORTAL ONLINE</span>
-  <span class="sbs">DOKUMEN 5</span>
+  <span class="sbs">DOKUMEN 6</span>
   <span class="sbs">NEGERI 4</span>
+  <span class="sbs">INDIKATOR 23</span>
   <span class="sbs">SENARIO 2</span>
   <span class="sb-spacer"></span>
   <span class="sbs">KEMAS NEGERI SARAWAK · KUMPULAN 4</span>
@@ -971,6 +974,13 @@ const DOCS = {
     desc: "Slaid pembentangan mengikut format Ibu Pejabat KEMAS, disunting terus dalam Canva.",
     baru: "Dibuka dalam Canva. Akses tertakluk kepada tetapan perkongsian pemilik reka bentuk.",
     link: CANVA
+  },
+  wajaran: {
+    code: "WAJARAN v1.2", acc: "a-gold", name: "HQ - Kriteria Indikator Wajaran (Model Negeri Besar)",
+    facts: [["Format","Excel (.xlsx)"],["Sheet","7"],["Sub-kriteria","23"],["Diskor","14/23"]],
+    desc: "Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah Senario A, Senario B keluasan, borang data negeri dan kaedah penuh. Ringkasan langsung ada di tab Wajaran & Indikator.",
+    baru: "v1.2: data sebenar Sarawak, Sabah, Johor dan Perak dimasukkan (Borang Negeri, Sept 2026). Sub-kriteria diskor naik daripada 11 kepada 14 daripada 23.",
+    xlsx: F + "HQ_Kriteria_Indikator_Wajaran_v1.2.xlsx", xlsxSize: "70 KB"
   }
 };
 
@@ -999,7 +1009,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const fileName = p => p.split("/").pop();
 
 /* ═══════════ TOPBAR STATS ═══════════ */
-$("#topStats").innerHTML = [["4","Negeri"],["57","Slaid Deck"],["143","M/S Proposal"],["61","Jadual"],["37","M/S Analisis"],["2","Senario"]]
+$("#topStats").innerHTML = [["4","Negeri"],["57","Slaid Deck"],["143","M/S Proposal"],["23","Indikator"],["14/23","Diskor"],["2","Senario"]]
   .map(([v,l]) => `<div class="ts"><div class="ts-val">${v}</div><div class="ts-label">${l}</div></div>`).join("");
 
 /* ═══════════ SIDEBAR ═══════════ */
@@ -1015,6 +1025,7 @@ $("#sbNav").innerHTML =
   `<div class="sb-divider"></div><div class="sb-group-lbl">Data Negeri (Drive)</div>` +
   STATES.map(s => sbRow(s.name, "var(--green)", s.code, "drive:" + s.key)).join("") +
   `<div class="sb-divider"></div><div class="sb-group-lbl">Analisis Khusus</div>` +
+  sbRow("Wajaran & Indikator","var(--cyan)","14/23","tab:wajaran") +
   sbRow("Dua Senario PKB/PKD","var(--gold)","2","tab:senario");
 
 /* ═══════════ BUTANG: jubin saiz sama, warna ikut jenis tindakan ═══════════ */
@@ -1030,6 +1041,8 @@ function btnsFor(k){
   if (d.html) h += tile("a", "b-view", "Buka Deck", "HTML · 57 slaid", `href="${d.html}" target="_blank" rel="noopener"`)
     + tile("a", "b-pub", "Pautan awam", "GitHub Pages", `href="${DECK_LIVE}" target="_blank" rel="noopener"`);
   if (d.link) h += tile("a", "b-view", "Buka di Canva", "Pautan luar", `href="${d.link}" target="_blank" rel="noopener"`);
+  if (d.xlsx) h += tile("a", "b-pdf", "Muat turun XLSX", d.xlsxSize, `href="${d.xlsx}" download`)
+    + tile("button", "b-tab", "Lihat Dalam Portal", "Wajaran & Indikator", `type="button" data-act="tab:wajaran"`);
   return h;
 }
 
@@ -1065,11 +1078,11 @@ $("#pane-home").innerHTML = `
     ${card("03","a-c3",ICO.chart,"ANALISIS","Analisis Isu 4 Negeri · v1.6","DALAMAN","st-int","10 isu merentas 4 negeri, termasuk Seksyen K Dua Senario PKB/PKD. Dokumen kerja Kumpulan 4.",["PDF","DOCX"],"pdf:analisis")}
     ${card("04","a-purple",ICO.slide,"SLAID HQ","Format HQ · Canva","LUAR","st-ext","Slaid pembentangan format Ibu Pejabat KEMAS. Dibuka dalam Canva.",["CANVA"],"canva")}
     ${card("05","a-green",ICO.folder,"DATA","Data 4 Negeri · Google Drive","DRIVE","st-ext","Folder Lampiran perjawatan Sarawak, Sabah, Johor dan Perak. Pratonton atau buka terus.",["4 FOLDER"],"tab:negeri")}
-    ${card("06","a-gold",ICO.split,"SENARIO","Naik Taraf Gred PKB/PKD","2 PILIHAN","st-live","Senario 1 naik taraf menyeluruh S9/S10 berbanding Senario 2 positioning dan keutamaan.",["JADUAL 61"],"tab:senario")}
+    ${card("06","a-gold",ICO.chart,"WAJARAN","Wajaran & Indikator · v1.2","14/23 DISKOR","st-live","Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah, 23 sub-kriteria dan status data ikut negeri.",["EXCEL","23 INDIKATOR"],"tab:wajaran")}
   </div>
 
   <div class="panel">
-    <div class="panel-hdr"><h2>Senarai Dokumen dan Muat Turun</h2><span class="meta">5 fail · kemas kini 23 Sept 2026</span></div>
+    <div class="panel-hdr"><h2>Senarai Dokumen dan Muat Turun</h2><span class="meta">6 fail · kemas kini 23 Sept 2026</span></div>
     <div class="panel-body">
       <div class="tbl-scroll"><table>
         <thead><tr><th style="width:21%">Dokumen</th><th style="width:7%">Versi</th><th style="width:17%">Format</th><th style="width:55%">Tindakan</th></tr></thead>
@@ -1078,19 +1091,13 @@ $("#pane-home").innerHTML = `
           <tr><td class="w">Proposal Cadangan</td><td>2.3</td><td>PDF 3.4 MB · DOCX 2.3 MB</td><td><div class="btn-grid a-c1">${btnsFor("kertas")}</div></td></tr>
           <tr><td class="w">Analisis Isu 4 Negeri</td><td>1.6</td><td>PDF 0.4 MB · DOCX 57 KB</td><td><div class="btn-grid a-c3">${btnsFor("analisis")}</div></td></tr>
           <tr><td class="w">Slaid Format HQ</td><td>Semasa</td><td>Canva</td><td><div class="btn-grid a-purple">${btnsFor("canva")}</div></td></tr>
+          <tr><td class="w">Kriteria Indikator Wajaran</td><td>1.2</td><td>Excel · 70 KB</td><td><div class="btn-grid a-gold">${btnsFor("wajaran")}</div></td></tr>
         </tbody>
       </table></div>
     </div>
   </div>
 
-  <div class="alert info">
-    <h3>Nota Penggunaan</h3>
-    <ul>
-      <li><strong>PDF</strong> dipaparkan terus dalam pelayar. Di telefon, guna butang <strong>Tab baharu</strong> jika paparan tidak lengkap.</li>
-      <li><strong>Folder Drive dan Canva</strong> tertakluk kepada tetapan perkongsian pemilik. Jika pratonton kosong atau diminta log masuk, minta akses daripada pemilik folder.</li>
-      <li><strong>Analisis Isu</strong> ialah dokumen kerja dalaman Kumpulan 4. Semak kesesuaian sebelum pautan portal dikongsi di luar kumpulan.</li>
-    </ul>
-  </div>`;
+  `;
 
 /* ═══════════ PANE: DOKUMEN ═══════════ */
 function docCard(k){
@@ -1106,7 +1113,7 @@ function docCard(k){
 }
 $("#pane-dokumen").innerHTML = `
   <div class="sec-label">Dokumen Utama</div>
-  <div class="docgrid">${["kertas","analisis","deck","canva"].map(docCard).join("")}</div>`;
+  <div class="docgrid">${["kertas","analisis","deck","canva","wajaran"].map(docCard).join("")}</div>`;
 
 /* ═══════════ PANE: DATA NEGERI ═══════════ */
 $("#pane-negeri").innerHTML = `
@@ -1126,6 +1133,86 @@ $("#pane-negeri").innerHTML = `
     </div>`).join("")}
   </div>
   <div class="alert"><h3>Akses Folder</h3><p>Folder dibuka menggunakan akaun Google anda. Jika dipaparkan "Anda perlukan akses", mohon akses daripada pemilik folder negeri berkenaan. Pratonton hanya berfungsi bagi folder yang dikongsi kepada akaun yang sedang log masuk.</p></div>`;
+
+/* ═══════════ PANE: WAJARAN & INDIKATOR ═══════════ */
+const WCRIT = {
+  PAKK: { nama: "Pendidikan Awal Kanak-Kanak", wajaran: "20%", acc: "a-c2" },
+  KEM:  { nama: "Kemahiran", wajaran: "15%", acc: "a-green" },
+  KOM:  { nama: "Komuniti", wajaran: "15%", acc: "a-c3" },
+  PENG: { nama: "Pengurusan", wajaran: "50%", acc: "a-purple" }
+};
+const WNEGERI = [
+  { n: "Sarawak", acc: "a-c2", idxA: "1.97x", rankA: 1, idxB: "2.53x", rankB: 1, nop: "2.22x" },
+  { n: "Sabah",   acc: "a-green", idxA: "1.86x", rankA: 2, idxB: "2.13x", rankB: 2, nop: "1.91x" },
+  { n: "Johor",   acc: "a-c3", idxA: "1.32x", rankA: 3, idxB: "1.31x", rankB: 3, nop: "1.37x" },
+  { n: "Perak",   acc: "a-purple", idxA: "1.14x", rankA: 5, idxB: "1.16x", rankB: 4, nop: "1.25x" }
+];
+// [kod, kriteria, sub-kriteria, [Sarawak,Sabah,Johor,Perak], diskor(1/0)]
+const WIND = [
+  ["1.1","PAKK","Bilangan kelas TABIKA",["1,300","1,402","1,162","804"],1],
+  ["1.2","PAKK","Bilangan kelas TASKA",["85","67","59","44"],1],
+  ["1.3","PAKK","Bilangan guru TABIKA",["1,291","1,349","1,043","757"],1],
+  ["1.4","PAKK","Bilangan guru TASKA",["249","206","179","149"],1],
+  ["1.5","PAKK","Bilangan pembantu",["1,263","1,465","1,223","849"],1],
+  ["1.6","PAKK","Bilangan murid TABIKA",["16,243","26,211","23,984","15,211"],1],
+  ["1.7","PAKK","Bilangan murid TASKA",["1,209","1,397","1,104","878"],1],
+  ["1.8","PAKK","Bilangan penyelia daerah",["37","36","20","21"],1],
+  ["2.1","KEM","Bilangan kelas",["158","230","201","190"],1],
+  ["2.2","KEM","Bilangan program / aktiviti",["125","230","278",null],0],
+  ["2.3","KEM","Bilangan guru",["68","112","88","92"],1],
+  ["2.4","KEM","Bilangan peserta",["2,496","4,081","2,842","3,261"],1],
+  ["3.1","KOM","Bilangan kampung",["6,906","≥2,558","631","1,079"],1],
+  ["3.2","KOM","Bilangan populasi",["2,509,500","3,592,800","4,100,900","2,540,400"],1],
+  ["3.3","KOM","Bilangan aktiviti / program",["382","219","217",null],0],
+  ["3.4","KOM","Bilangan peserta",["20,010","4,313","2,546",null],0],
+  ["4.1","PENG","Aset alih",["28,630","36,669",null,null],0],
+  ["4.2","PENG","Aset tidak alih",[null,"1,022","893",null],0],
+  ["4.3","PENG","Bajet (OE)",["6,896,060","76,816,482","101,223,814",null],0],
+  ["4.4","PENG","Bajet (DE)",["8,351,734","7,031,639","3,911,500",null],0],
+  ["4.5","PENG","Bilangan Baucer",[null,"3,997","4,825",null],0],
+  ["4.6","PENG","Bilangan projek dan program",["507","204","46",null],0],
+  ["4.7","PENG","Perjawatan / pengurusan pegawai",["2,032","2,146*","1,508*","1,223"],1]
+];
+$("#pane-wajaran").innerHTML = `
+  <div class="hero"><div class="hero-welcome">HQ - Kriteria Indikator Wajaran · v1.2 · 23 Sept 2026</div>
+    <div class="hero-title"><span class="ht-line1">WAJARAN &amp; INDIKATOR</span><span class="ht-gold">Beban tugas berwajaran, 4 negeri besar</span></div>
+    <div class="hero-desc">Kerangka wajaran HQ (fail negeri sederhana v3) diterapkan ke atas Sarawak, Sabah, Johor dan Perak merentas 4 kriteria dan 23 sub-kriteria. Indeks 1.00 = purata 5 negeri sederhana (Selangor, Kedah, Pahang, Terengganu, Kelantan). Muat turun fail Excel penuh (formula, borang negeri dan kaedah) di tab Dokumen.</div></div>
+  <div class="sec-label">Indeks Beban Tugas Berwajaran (Senario A)</div>
+  <div class="stgrid">${WNEGERI.map(s => `
+    <div class="stc ${s.acc}">
+      <div class="stc-hd"><div class="stc-code">${s.idxA}</div><div><div class="stc-name">${s.n}</div><div class="stc-sub">Kedudukan ${s.rankA} daripada 9 negeri</div></div></div>
+      <div class="stc-bd">
+        <div class="bf-k">Berbanding purata 5 negeri sederhana</div>
+        <div class="chips">
+          <span class="chip ok">Senario B (+ keluasan): ${s.idxB}, #${s.rankB}</span>
+          <span class="chip">Tanpa Pengurusan: ${s.nop}</span>
+        </div>
+      </div>
+    </div>`).join("")}
+  </div>
+  <div class="panel">
+    <div class="panel-hdr"><h2>Wajaran Kriteria (HQ)</h2><span class="meta">Jumlah 100%</span></div>
+    <div class="panel-body"><div class="tbl-scroll"><table>
+      <thead><tr><th>Kriteria</th><th style="width:14%">Wajaran</th><th>Sub-kriteria diskor</th></tr></thead>
+      <tbody>${Object.entries(WCRIT).map(([k,c]) => {
+        const items = WIND.filter(w => w[1] === k);
+        const scored = items.filter(w => w[4]).length;
+        return `<tr><td class="w">${c.nama}</td><td>${c.wajaran}</td><td>${scored} daripada ${items.length}</td></tr>`;
+      }).join("")}</tbody>
+    </table></div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-hdr"><h2>23 Sub-Kriteria dan Status Data</h2><span class="meta">14 daripada 23 diskor · liputan berwajaran 46%</span></div>
+    <div class="panel-body"><div class="tbl-scroll"><table>
+      <thead><tr><th style="width:6%">Kod</th><th style="width:24%">Sub Kriteria</th><th>Sarawak</th><th>Sabah</th><th>Johor</th><th>Perak</th><th style="width:9%">Diskor?</th></tr></thead>
+      <tbody>${WIND.map(([kod,krit,nama,vals,diskor]) => `
+        <tr class="${WCRIT[krit].acc}"><td class="k">${kod}</td><td class="w">${nama}</td>
+          ${vals.map(v => `<td>${v === null ? '<span class="chip">belum</span>' : v}</td>`).join("")}
+          <td>${diskor ? '<span class="chip ok">YA</span>' : '<span class="chip">TIDAK</span>'}</td></tr>`).join("")}
+      </tbody>
+    </table></div></div>
+  </div>
+  <div class="alert info"><h3>Nota Data</h3><p>Borang Negeri B1-B3 (pembantu, murid TABIKA/TASKA) kini lengkap 4/4 negeri. Item Pengurusan (aset, bajet, baucer, projek) masih separa: Perak belum menghantar sebarang item Bahagian A Borang Negeri. Dua nilai (Baucer Sarawak "10-15K", Projek Johor "657 PO") dikemukakan dalam format tidak tepat dan sengaja tidak dimasukkan ke skor sehingga disahkan negeri. Butiran penuh dan sejarah versi: sheet Kaedah &amp; Sumber dalam fail Excel.</p></div>`;
 
 /* ═══════════ PANE: SENARIO ═══════════ */
 $("#pane-senario").innerHTML = `
@@ -1160,7 +1247,7 @@ $("#pane-senario").innerHTML = `
 /* ═══════════ TAB ═══════════ */
 function setTab(t){
   document.querySelectorAll(".nb-item").forEach(b => b.classList.toggle("active", b.dataset.tab === t));
-  ["home","dokumen","negeri","senario"].forEach(p => $("#pane-" + p).classList.toggle("hidden", p !== t));
+  ["home","dokumen","negeri","wajaran","senario"].forEach(p => $("#pane-" + p).classList.toggle("hidden", p !== t));
   $("#content").scrollTop = 0;
 }
 document.querySelectorAll(".nb-item").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
