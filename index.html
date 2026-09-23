@@ -781,10 +781,9 @@ td.k{font-family:var(--mono);font-size:10px;letter-spacing:.6px;color:var(--text
 .sc-click{all:unset;display:flex;flex-direction:column;width:100%;cursor:pointer}
 .sc-click:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
 .sc.sc-hasact{cursor:default}
-.sc-quickact{margin-top:9px}
-.sc-quickact .lnk{min-height:40px;padding:6px 7px}
-.sc-quickact .lnk .bl{font-size:9.5px}
-.sc-quickact .lnk .bs{font-size:8px}
+.sc-hasact .btn-grid.sc-quickact{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px;min-width:0}
+.sc-quickact .lnk.cpt{min-height:28px;padding:5px 4px;justify-content:center;align-items:center;gap:0}
+.sc-quickact .lnk.cpt .bl{font-size:9.5px;letter-spacing:1px;text-align:center;line-height:1.2}
 
 @media (max-width:1080px){.docgrid,.stgrid,.sn-grid{grid-template-columns:1fr}}
 @media (max-width:820px){
@@ -1058,6 +1057,16 @@ function btnsFor(k){
     + tile("button", "b-tab", "Portal View", "Wajaran & Indikator", `type="button" data-act="tab:wajaran"`);
   return h;
 }
+/* Varian padat 1x4 untuk muka kad (VIEW · DECK · PDF · DOCX); makna penuh dalam tooltip title */
+function btnsCompact(k){
+  const d = DOCS[k]; let h = "";
+  const t = (tag, cls, label, attrs) => `<${tag} class="lnk cpt ${cls}" ${attrs}><span class="bl">${label}</span></${tag}>`;
+  if (d.pdf) h += t("button", "b-view", "View", `type="button" data-act="pdf:${k}" title="View PDF dalam portal"`);
+  if (d.slides) h += t("a", "b-tab", "Deck", `href="${d.slides}" target="_blank" rel="noopener" title="Interactive Slides · ${d.slidesSub || "HTML"}"`);
+  if (d.pdf) h += t("a", "b-pdf", "PDF", `href="${d.pdf}" download title="Download PDF · ${d.pdfSize}"`);
+  if (d.docx) h += t("a", "b-docx", "DOCX", `href="${d.docx}" download title="Download DOCX · ${d.docxSize}"`);
+  return h;
+}
 
 /* ═══════════ PANE: PUSAT KAWALAN ═══════════ */
 function card(num, acc, ico, code, full, status, stCls, desc, tags, act, quickActs){
@@ -1071,7 +1080,7 @@ function card(num, acc, ico, code, full, status, stCls, desc, tags, act, quickAc
     return `<div class="sc sc-hasact ${acc}">
       <button class="sc-click" type="button" data-act="${act}">${info}</button>
       ${tagsRow}
-      <div class="btn-grid c2 sc-quickact ${acc}">${quickActs}</div>
+      <div class="btn-grid sc-quickact ${acc}">${quickActs}</div>
     </div>`;
   }
   return `<button class="sc ${acc}" type="button" data-act="${act}">${info}${tagsRow}</button>`;
@@ -1094,8 +1103,8 @@ $("#pane-home").innerHTML = `
   <div class="sec-label">Modul Dokumen</div>
   <div class="sistem-grid">
     ${card("01","a-c2",ICO.deck,"DECK","Deck Interaktif · v2.3","LIVE","st-live","57 slaid dengan pop-up data daripada kertas cadangan. Dibuka dalam new tab.",["HTML","57 SLAID"],"deck")}
-    ${card("02","a-c1",ICO.doc,"PROPOSAL","Proposal Cadangan · v2.3","PDF","st-live","143 muka surat, 61 jadual, 36 rujukan. View terus dalam pelayar atau download PDF dan DOCX.",["PDF","DOCX"],"pdf:kertas",btnsFor("kertas"))}
-    ${card("03","a-c3",ICO.chart,"ANALISIS","Analisis Isu 4 Negeri · v1.6","DALAMAN","st-int","10 isu merentas 4 negeri, termasuk Seksyen K Dua Senario PKB/PKD. Dokumen kerja Kumpulan 4.",["PDF","DOCX"],"pdf:analisis",btnsFor("analisis"))}
+    ${card("02","a-c1",ICO.doc,"PROPOSAL","Proposal Cadangan · v2.3","PDF","st-live","143 muka surat, 61 jadual, 36 rujukan. View terus dalam pelayar atau download PDF dan DOCX.",["PDF","DOCX"],"pdf:kertas",btnsCompact("kertas"))}
+    ${card("03","a-c3",ICO.chart,"ANALISIS","Analisis Isu 4 Negeri · v1.6","DALAMAN","st-int","10 isu merentas 4 negeri, termasuk Seksyen K Dua Senario PKB/PKD. Dokumen kerja Kumpulan 4.",["PDF","DOCX"],"pdf:analisis",btnsCompact("analisis"))}
     ${card("04","a-purple",ICO.slide,"SLAID HQ","Format HQ · Canva","LUAR","st-ext","Slaid pembentangan format Ibu Pejabat KEMAS. Dibuka dalam Canva.",["CANVA"],"canva")}
     ${card("05","a-green",ICO.folder,"DATA","Data 4 Negeri · Google Drive","DRIVE","st-ext","Folder Lampiran perjawatan Sarawak, Sabah, Johor dan Perak. Pratonton atau buka terus.",["4 FOLDER"],"tab:negeri")}
     ${card("06","a-gold",ICO.chart,"WAJARAN","Wajaran & Indikator · v1.4","16/23 DISKOR","st-live","Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah, 23 sub-kriteria dan status data ikut negeri.",["EXCEL","23 INDIKATOR"],"tab:wajaran")}
