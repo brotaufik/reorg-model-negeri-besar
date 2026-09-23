@@ -253,7 +253,7 @@ body{
 
 /* ============ PENTAS + KERTAS ============ */
 .stage{grid-area:stage; position:relative; display:flex; align-items:center; justify-content:center; padding:18px; overflow:hidden; min-height:0}
-.scaler{width:1280px; height:720px; transform-origin:center center; position:relative}
+.scaler{width:1280px; height:720px; min-width:1280px; min-height:720px; flex:0 0 auto; transform-origin:center center; position:relative}
 .slide{
   position:absolute; inset:0; padding:42px 52px 36px 62px;
   display:none; flex-direction:column; overflow:hidden; border-radius:2px 5px 5px 2px;
