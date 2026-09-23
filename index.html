@@ -871,7 +871,7 @@ td .btn-grid{min-width:540px}
     </div>
     <div class="sys-status">
       <div class="ss-label">VERSI</div>
-      <div class="ss-val">2.6 · 23 SEPT</div>
+      <div class="ss-val">2.7 · 23 SEPT</div>
     </div>
   </div>
 </header>
@@ -900,7 +900,7 @@ td .btn-grid{min-width:540px}
     <div class="sb-flex"></div>
     <div class="sb-security">
       <div class="sec-lbl">Status Dokumen</div>
-      <div class="sec-level">VERSI 2.6</div>
+      <div class="sec-level">VERSI 2.7</div>
       <div class="sec-sub">Dikemas kini 23 September 2026</div>
       <div class="sb-enc">
         <span class="dot-live" style="background:var(--blue2);box-shadow:0 0 6px var(--blue2)"></span>
@@ -987,11 +987,11 @@ const DOCS = {
     link: CANVA
   },
   wajaran: {
-    code: "WAJARAN v1.3", acc: "a-gold", name: "HQ - Kriteria Indikator Wajaran (Model Negeri Besar)",
-    facts: [["Format","Excel (.xlsx)"],["Sheet","7"],["Sub-kriteria","23"],["Diskor","17/23"]],
+    code: "WAJARAN v1.4", acc: "a-gold", name: "HQ - Kriteria Indikator Wajaran (Model Negeri Besar)",
+    facts: [["Format","Excel (.xlsx)"],["Sheet","7"],["Sub-kriteria","23"],["Diskor","16/23"]],
     desc: "Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah Senario A, Senario B keluasan, borang data negeri dan kaedah penuh. Ringkasan langsung ada di tab Wajaran & Indikator.",
-    baru: "v1.3: Perak melengkapkan Borang B4 hingga B12 dan B14 (23 Sept 2026); Baucer Sarawak dikemas kini 15,000. Sub-kriteria diskor naik daripada 14 kepada 17 daripada 23; kedudukan Johor dan Perak bertukar (view Nota Data).",
-    xlsx: F + "HQ_Kriteria_Indikator_Wajaran_v1.3.xlsx", xlsxSize: "70 KB"
+    baru: "v1.4: sub-kriteria 4.6 (projek dan program) dikecualikan sementara daripada skor sehingga Johor mengesahkan takrif \"46 Projek, 657 PO\"; Johor 1.41x kembali di atas Perak 1.17x (16/23 diskor). B7 Johor 44,423 dan B9 Sarawak 342 ditambah (tidak mengubah skor). Semakan semula: lajur Johor dan Perak tidak tertukar.",
+    xlsx: F + "HQ_Kriteria_Indikator_Wajaran_v1.4.xlsx", xlsxSize: "72 KB"
   }
 };
 
@@ -1020,7 +1020,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const fileName = p => p.split("/").pop();
 
 /* ═══════════ TOPBAR STATS ═══════════ */
-$("#topStats").innerHTML = [["4","Negeri"],["57","Slaid Deck"],["143","M/S Proposal"],["23","Indikator"],["17/23","Diskor"],["2","Senario"]]
+$("#topStats").innerHTML = [["4","Negeri"],["57","Slaid Deck"],["143","M/S Proposal"],["23","Indikator"],["16/23","Diskor"],["2","Senario"]]
   .map(([v,l]) => `<div class="ts"><div class="ts-val">${v}</div><div class="ts-label">${l}</div></div>`).join("");
 
 /* ═══════════ SIDEBAR ═══════════ */
@@ -1036,7 +1036,7 @@ $("#sbNav").innerHTML =
   `<div class="sb-divider"></div><div class="sb-group-lbl">Data Negeri (Drive)</div>` +
   STATES.map(s => sbRow(s.name, "var(--green)", s.code, "drive:" + s.key)).join("") +
   `<div class="sb-divider"></div><div class="sb-group-lbl">Analisis Khusus</div>` +
-  sbRow("Wajaran & Indikator","var(--cyan)","17/23","tab:wajaran") +
+  sbRow("Wajaran & Indikator","var(--cyan)","16/23","tab:wajaran") +
   sbRow("Dua Senario PKB/PKD","var(--gold)","2","tab:senario");
 
 /* ═══════════ BUTANG: jubin saiz sama, warna ikut jenis tindakan ═══════════ */
@@ -1098,7 +1098,7 @@ $("#pane-home").innerHTML = `
     ${card("03","a-c3",ICO.chart,"ANALISIS","Analisis Isu 4 Negeri · v1.6","DALAMAN","st-int","10 isu merentas 4 negeri, termasuk Seksyen K Dua Senario PKB/PKD. Dokumen kerja Kumpulan 4.",["PDF","DOCX"],"pdf:analisis",btnsFor("analisis"))}
     ${card("04","a-purple",ICO.slide,"SLAID HQ","Format HQ · Canva","LUAR","st-ext","Slaid pembentangan format Ibu Pejabat KEMAS. Dibuka dalam Canva.",["CANVA"],"canva")}
     ${card("05","a-green",ICO.folder,"DATA","Data 4 Negeri · Google Drive","DRIVE","st-ext","Folder Lampiran perjawatan Sarawak, Sabah, Johor dan Perak. Pratonton atau buka terus.",["4 FOLDER"],"tab:negeri")}
-    ${card("06","a-gold",ICO.chart,"WAJARAN","Wajaran & Indikator · v1.3","17/23 DISKOR","st-live","Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah, 23 sub-kriteria dan status data ikut negeri.",["EXCEL","23 INDIKATOR"],"tab:wajaran")}
+    ${card("06","a-gold",ICO.chart,"WAJARAN","Wajaran & Indikator · v1.4","16/23 DISKOR","st-live","Kerangka wajaran HQ diterapkan ke atas 4 negeri besar: skor nisbah, 23 sub-kriteria dan status data ikut negeri.",["EXCEL","23 INDIKATOR"],"tab:wajaran")}
   </div>
 
   <div class="panel">
@@ -1111,7 +1111,7 @@ $("#pane-home").innerHTML = `
           <tr><td class="w">Proposal Cadangan</td><td>2.3</td><td>PDF 3.4 MB · DOCX 2.3 MB</td><td><div class="btn-grid a-c1">${btnsFor("kertas")}</div></td></tr>
           <tr><td class="w">Analisis Isu 4 Negeri</td><td>1.6</td><td>PDF 0.4 MB · DOCX 57 KB · Slaid HTML 0.3 MB</td><td><div class="btn-grid a-c3">${btnsFor("analisis")}</div></td></tr>
           <tr><td class="w">Slaid Format HQ</td><td>Semasa</td><td>Canva</td><td><div class="btn-grid a-purple">${btnsFor("canva")}</div></td></tr>
-          <tr><td class="w">Kriteria Indikator Wajaran</td><td>1.3</td><td>Excel · 70 KB</td><td><div class="btn-grid a-gold">${btnsFor("wajaran")}</div></td></tr>
+          <tr><td class="w">Kriteria Indikator Wajaran</td><td>1.4</td><td>Excel · 72 KB</td><td><div class="btn-grid a-gold">${btnsFor("wajaran")}</div></td></tr>
         </tbody>
       </table></div>
     </div>
@@ -1162,10 +1162,10 @@ const WCRIT = {
   PENG: { nama: "Pengurusan", wajaran: "50%", acc: "a-purple" }
 };
 const WNEGERI = [
-  { n: "Sarawak", acc: "a-c2", idxA: "2.18x", rankA: 1, idxB: "2.72x", rankB: 1, nop: "2.22x", delta: "v1.2: 1.97x, #1" },
-  { n: "Sabah",   acc: "a-green", idxA: "1.68x", rankA: 2, idxB: "1.96x", rankB: 2, nop: "1.94x", delta: "v1.2: 1.86x, #2" },
-  { n: "Johor",   acc: "a-c3", idxA: "1.15x", rankA: 5, idxB: "1.15x", rankB: 5, nop: "1.55x", delta: "v1.2: 1.32x, #3" },
-  { n: "Perak",   acc: "a-purple", idxA: "1.48x", rankA: 3, idxB: "1.46x", rankB: 3, nop: "1.31x", delta: "v1.2: 1.14x, #5" }
+  { n: "Sarawak", acc: "a-c2", idxA: "1.97x", rankA: 1, idxB: "2.54x", rankB: 1, nop: "2.22x", delta: "v1.3: 2.18x, #1" },
+  { n: "Sabah",   acc: "a-green", idxA: "1.88x", rankA: 2, idxB: "2.14x", rankB: 2, nop: "1.94x", delta: "v1.3: 1.68x, #2" },
+  { n: "Johor",   acc: "a-c3", idxA: "1.41x", rankA: 3, idxB: "1.39x", rankB: 3, nop: "1.55x", delta: "v1.3: 1.15x, #5" },
+  { n: "Perak",   acc: "a-purple", idxA: "1.17x", rankA: 4, idxB: "1.18x", rankB: 4, nop: "1.31x", delta: "v1.3: 1.48x, #3" }
 ];
 // [kod, kriteria, sub-kriteria, [Sarawak,Sabah,Johor,Perak], diskor(1/0)]
 const WIND = [
@@ -1185,16 +1185,16 @@ const WIND = [
   ["3.2","KOM","Bilangan populasi",["2,509,500","3,592,800","4,100,900","2,540,400"],1],
   ["3.3","KOM","Bilangan aktiviti / program",["382","219","217","175"],1],
   ["3.4","KOM","Bilangan peserta",["20,010","4,313","2,546","8,500"],0],
-  ["4.1","PENG","Aset alih",["28,630","36,669",null,"30,408"],0],
-  ["4.2","PENG","Aset tidak alih",[null,"1,022","893","367"],0],
+  ["4.1","PENG","Aset alih",["28,630","36,669","44,423","30,408"],0],
+  ["4.2","PENG","Aset tidak alih",["342","1,022","893","367"],0],
   ["4.3","PENG","Bajet (OE)",["6,896,060","76,816,482","101,223,814","87,049,719"],0],
   ["4.4","PENG","Bajet (DE)",["8,351,734","7,031,639","3,911,500","3,038,000"],0],
   ["4.5","PENG","Bilangan Baucer",["15,000","3,997","4,825","7,500"],0],
-  ["4.6","PENG","Bilangan projek dan program",["507","204","46","450"],1],
+  ["4.6","PENG","Bilangan projek dan program",["507","204","46","450"],0],
   ["4.7","PENG","Perjawatan / pengurusan pegawai",["2,032","2,146*","1,508*","1,223"],1]
 ];
 $("#pane-wajaran").innerHTML = `
-  <div class="hero"><div class="hero-welcome">HQ - Kriteria Indikator Wajaran · v1.3 · 23 Sept 2026 · kemas kini data Perak</div>
+  <div class="hero"><div class="hero-welcome">HQ - Kriteria Indikator Wajaran · v1.4 · 23 Sept 2026 · 4.6 dikecualikan sementara</div>
     <div class="hero-title"><span class="ht-line1">WAJARAN &amp; INDIKATOR</span><span class="ht-gold">Beban tugas berwajaran, 4 negeri besar</span></div>
     <div class="hero-desc">Kerangka wajaran HQ (fail negeri sederhana v3) diterapkan ke atas Sarawak, Sabah, Johor dan Perak merentas 4 kriteria dan 23 sub-kriteria. Indeks 1.00 = purata 5 negeri sederhana (Selangor, Kedah, Pahang, Terengganu, Kelantan). Download fail Excel penuh (formula, borang negeri dan kaedah) di tab Dokumen.</div></div>
   <div class="sec-label">Indeks Beban Tugas Berwajaran (Senario A)</div>
@@ -1223,7 +1223,7 @@ $("#pane-wajaran").innerHTML = `
     </table></div></div>
   </div>
   <div class="panel">
-    <div class="panel-hdr"><h2>23 Sub-Kriteria dan Status Data</h2><span class="meta">17 daripada 23 diskor · liputan berwajaran 60.5%</span></div>
+    <div class="panel-hdr"><h2>23 Sub-Kriteria dan Status Data</h2><span class="meta">16 daripada 23 diskor · liputan berwajaran 53.4%</span></div>
     <div class="panel-body"><div class="tbl-scroll"><table>
       <thead><tr><th style="width:6%">Kod</th><th style="width:24%">Sub Kriteria</th><th>Sarawak</th><th>Sabah</th><th>Johor</th><th>Perak</th><th style="width:9%">Diskor?</th></tr></thead>
       <tbody>${WIND.map(([kod,krit,nama,vals,diskor]) => `
@@ -1233,8 +1233,9 @@ $("#pane-wajaran").innerHTML = `
       </tbody>
     </table></div></div>
   </div>
-  <div class="alert info"><h3>Nota Data (v1.3, 23 Sept 2026)</h3><p><strong>Kemas kini Perak:</strong> Perak melengkapkan Borang B4 hingga B7, B9 hingga B12 dan B14, jadi B4 hingga B6, B10 hingga B12 dan B14 kini lengkap 4/4 negeri; Baucer Sarawak dikemas kini kepada 15,000 (sebelum ini julat "10-15K"). Tiga sub-kriteria baharu diskor (2.2, 3.3, 4.6), menjadikan 17 daripada 23. Belum diskor: 3.4 dan 4.1 hingga 4.5 kerana garis asas HQ bagi negeri sederhana belum sah (data HQ hanya 1 hingga 2 negeri), bukan kerana negeri besar belum hantar; 4.1 masih belum ada Johor dan 4.2 belum ada Sarawak.</p>
-    <p><strong>Perhatian, kedudukan bertukar:</strong> Johor turun daripada #3 ke #5 dan Perak naik daripada #5 ke #3. Puncanya ialah 4.6 (projek dan program), kini satu daripada hanya dua item Pengurusan yang diskor dan wajaran Pengurusan 50%: Johor 46 projek berbanding purata negeri sederhana 200 (nisbah 0.23), Perak 450 (nisbah 2.25). Angka Johor datang daripada laporan "46 Projek, 657 PO" dan hanya 46 digunakan kerana takrif "PO" belum disahkan. Kedudukan Johor bergantung sepenuhnya pada tafsiran itu, jadi sahkan dengan Johor sebelum keputusan ini digunakan. Butiran penuh dan sejarah versi: sheet Kaedah &amp; Sumber dalam fail Excel.</p></div>`;
+  <div class="alert info"><h3>Nota Data (v1.4, 23 Sept 2026)</h3><p><strong>4.6 dikecualikan sementara:</strong> Bilangan projek dan program (4.6) dikeluarkan daripada skor melalui lajur Paksa = TIDAK dalam sheet Skor Senario A sehingga Johor mengesahkan takrif laporan "46 Projek, 657 PO" (hanya 46 digunakan setakat ini). Ini menyamai layanan v1.2, apabila item berformat tidak tepat tidak dimasukkan ke skor. Kesan: 16 daripada 23 diskor, Pengurusan diwakili 4.7 sahaja, dan kedudukan kembali Johor 1.41x (#3) di atas Perak 1.17x (#4). Untuk memasukkan 4.6 semula, kosongkan sel Paksa dalam Excel; semua skor dikira semula secara automatik.</p>
+    <p><strong>Kenapa 4.6 penting:</strong> dengan wajaran Pengurusan 50% dan hanya dua item Pengurusan yang layak diskor (4.6 dan 4.7), 4.6 seorang diri membawa kira-kira 25% daripada indeks. Johor 46 projek berbanding purata negeri sederhana 200.4 memberi nisbah 0.23, Perak 450 memberi 2.25; itu sahaja yang menolak Johor ke #5 dalam v1.3 walaupun Johor mengatasi Perak pada 13 daripada 17 sub-kriteria lain. Nilai lajur Johor dan Perak telah disemak semula terhadap fail asal negeri dan tidak tertukar. Jika "657 PO" atau 703 (46 + 657) digunakan, indeks Johor menjadi 1.91x hingga 1.97x.</p>
+    <p><strong>Data baharu (tidak mengubah skor):</strong> B7 Johor 44,423 item aset alih dan B9 Sarawak 342 premis aset tidak alih ditambah daripada fail Copy To HQ Indikator (23 Sept 2026); 4.1 dan 4.2 kini lengkap 4/4 negeri tetapi masih belum diskor kerana garis asas HQ bagi negeri sederhana belum sah (data HQ hanya 1 hingga 2 negeri), sama seperti 3.4 dan 4.3 hingga 4.5. Butiran penuh dan sejarah versi: sheet Kaedah &amp; Sumber dalam fail Excel.</p></div>`;
 
 /* ═══════════ PANE: SENARIO ═══════════ */
 $("#pane-senario").innerHTML = `
